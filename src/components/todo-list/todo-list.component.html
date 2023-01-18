@@ -10,9 +10,9 @@
           </p>
         </div>
         <div class="column">
-          <p class="date">{{ "Created at: " + item.createdAt }}</p>
+          <p class="date">Created at: {{ item.createdAt | customDate }}</p>
           <p class="date" *ngIf="item.updatedAt">
-            {{ "Updated at: " + item.updatedAt }}
+            Updated at: {{ item.updatedAt | customDate }}
           </p>
         </div>
       </div>

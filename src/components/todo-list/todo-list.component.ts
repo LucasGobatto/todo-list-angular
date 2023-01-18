@@ -1,4 +1,4 @@
-import { Component, SimpleChanges, OnInit } from '@angular/core';
+import { Component, SimpleChanges, OnInit, OnChanges } from '@angular/core';
 import { TodoService } from '../../data/todo-service';
 import { TodoItemModel, TodoStatus } from '../../domain/todo.model';
 
@@ -7,11 +7,11 @@ import { TodoItemModel, TodoStatus } from '../../domain/todo.model';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css'],
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, OnChanges {
   readonly title = 'To do List';
   readonly status: TodoStatus[] = ['Todo', 'In progress', 'Done'];
   private allItems: TodoItemModel[] = [];
-  items: Record<TodoStatus, TodoItemModel[]> = {
+  readonly items: Record<TodoStatus, TodoItemModel[]> = {
     Todo: [],
     'In progress': [],
     Done: [],
@@ -29,6 +29,10 @@ export class TodoListComponent implements OnInit {
     const item = this.allItems.find((item) => item.id === id)!;
 
     this.updateItemStatus(item);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 
   private updateItemStatus(item: TodoItemModel) {
