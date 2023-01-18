@@ -1,0 +1,22 @@
+<ul>
+  <section *ngFor="let s of status">
+    <h2 *ngIf="items[s].length">{{ s }}</h2>
+    <li *ngFor="let item of items[s]">
+      <div class="wrapper">
+        <div class="column">
+          <h4>{{ item.title }}</h4>
+          <p class="description" *ngIf="item.description != ''">
+            {{ item.description }}
+          </p>
+        </div>
+        <div class="column">
+          <p class="date">{{ "Created at: " + item.createdAt }}</p>
+          <p class="date" *ngIf="item.updatedAt">
+            {{ "Updated at: " + item.updatedAt }}
+          </p>
+        </div>
+      </div>
+      <button (click)="onClick(item.id)">Done</button>
+    </li>
+  </section>
+</ul>

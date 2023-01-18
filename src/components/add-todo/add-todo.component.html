@@ -1,0 +1,18 @@
+<div>
+  <label>Title</label>
+  <input
+    type="text"
+    id="title"
+    (keyup)="onTitleChange($event)"
+    value="{{ title }}"
+  />
+  <label>Description</label>
+  <input
+    type="text"
+    id="description"
+    (keyup)="onDescriptionChange($event)"
+    value="{{ description }}"
+  />
+
+  <input type="submit" id="submit" value="Confirm" (click)="onSubmit()" />
+</div>
