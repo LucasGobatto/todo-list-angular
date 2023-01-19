@@ -2,7 +2,7 @@
 
 This project have the main propose to study the Angular framework. It was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
 
-![image](https://user-images.githubusercontent.com/46571639/213089153-ac59918a-4101-4c44-9dde-2f5e591205bc.png)
+![image](https://user-images.githubusercontent.com/46571639/213347873-0248b3b9-a038-44f9-8fe3-4136b4834614.png)
 
 ## Development server
 
