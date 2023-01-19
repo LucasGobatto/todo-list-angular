@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '@data/todo-service';
-import { TodoItemModel, TodoStatus } from '@domain/todo.model';
+import {
+  TodoItemModel,
+  TodoStatus,
+  progressStatusMapper,
+} from '@domain/todo.model';
 
 @Component({
   selector: 'todo-list',
@@ -8,7 +12,6 @@ import { TodoItemModel, TodoStatus } from '@domain/todo.model';
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
-  readonly title = 'To do List';
   readonly status: TodoStatus[] = ['Todo', 'In progress', 'Done'];
   private allItems: TodoItemModel[] = [];
   readonly items: Record<TodoStatus, TodoItemModel[]> = {
@@ -31,15 +34,34 @@ export class TodoListComponent implements OnInit {
     this.updateItemStatus(item);
   }
 
-  private updateItemStatus(item: TodoItemModel) {
-    const statusMapper: Record<TodoStatus, TodoStatus> = {
-      Todo: 'In progress',
-      'In progress': 'Done',
-      Done: 'Done',
-    };
+  receiveNewTodo(newTodo: TodoItemModel) {
+    this.allItems = Array.from(new Set([...this.allItems, newTodo]));
+    this.items[newTodo.status].push(newTodo);
+  }
 
-    this.todoService.updateTodo(item.id, {
-      status: statusMapper[item.status]!,
+  private updateItemStatus(todoItem: TodoItemModel) {
+    this.updateItemsList({
+      ...todoItem,
+      status: progressStatusMapper[todoItem.status],
     });
+
+    this.todoService.updateTodo(todoItem.id, {
+      status: progressStatusMapper[todoItem.status]!,
+    });
+  }
+
+  private updateItemsList(todoItem: TodoItemModel) {
+    const todo = this.allItems.find(({ id }) => todoItem.id === id)!;
+    const oldStatus = todo.status;
+
+    const index = this.items[oldStatus].findIndex(
+      ({ id }) => todoItem.id === id
+    );
+
+    this.items[oldStatus] = [
+      ...this.items[oldStatus].slice(0, index),
+      ...this.items[oldStatus].slice(index + 1),
+    ];
+    this.items[todoItem.status].push(todoItem);
   }
 }

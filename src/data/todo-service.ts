@@ -1,4 +1,4 @@
-import { TodoItemModel } from '@domain/todo.model';
+import { CreateTodoItemModel, TodoItemModel } from '@domain/todo.model';
 import { LocalStorageService } from './local-storage.service';
 
 export class TodoService {
@@ -13,11 +13,20 @@ export class TodoService {
     return this.items;
   }
 
-  addTodo(todoItem: Omit<TodoItemModel, 'id' | 'createdAt' | 'updatedAt'>) {
-    const [, id] = Math.random().toString().split('.');
+  addTodo(todoItem: CreateTodoItemModel): TodoItemModel {
+    const id = Math.random().toString().split('.')[1];
     const now = new Date();
-    this.items.push({ ...todoItem, id, createdAt: now });
+    const newTodoItem = {
+      ...todoItem,
+      status: 'Todo',
+      id,
+      createdAt: now,
+    } satisfies TodoItemModel;
+
+    this.items.push(newTodoItem);
     this.updateLocalStorage();
+
+    return newTodoItem;
   }
 
   updateTodo(id: string, data: Partial<TodoItemModel>) {
