@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Output, EventEmitter, Component } from '@angular/core';
 import { TodoService } from '@data/todo-service';
+import { TodoItemModel } from '@domain/todo.model';
 
 @Component({
   selector: 'add-todo',
@@ -7,6 +8,7 @@ import { TodoService } from '@data/todo-service';
   styleUrls: ['./add-todo.component.css'],
 })
 export class AddTodoComponent {
+  @Output() addTodoEvent = new EventEmitter<TodoItemModel>();
   title = '';
   description = '';
 
@@ -22,11 +24,12 @@ export class AddTodoComponent {
 
   onSubmit() {
     if (this.title) {
-      this.todoService.addTodo({
+      const todoItem = this.todoService.addTodo({
         title: this.title,
         description: this.description || undefined,
-        status: 'Todo',
       });
+
+      this.addTodoEvent.emit(todoItem);
 
       this.title = '';
       this.description = '';

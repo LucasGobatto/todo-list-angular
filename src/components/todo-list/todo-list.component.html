@@ -1,3 +1,4 @@
+<add-todo (addTodoEvent)="receiveNewTodo($event)" />
 <ul>
   <section *ngFor="let s of status">
     <h2 *ngIf="items[s].length">{{ s }}</h2>
