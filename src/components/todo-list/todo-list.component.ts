@@ -12,8 +12,8 @@ import {
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
-  readonly status: TodoStatus[] = ['Todo', 'In progress', 'Done'];
   private allItems: TodoItemModel[] = [];
+  readonly status: TodoStatus[] = ['Todo', 'In progress', 'Done'];
   readonly items: Record<TodoStatus, TodoItemModel[]> = {
     Todo: [],
     'In progress': [],

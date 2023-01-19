@@ -1,5 +1,11 @@
+.app-container {
+  display: flex;
+  justify-content: center;
+}
+
 .app {
   margin-inline: 1rem;
+  width: 700px;
 }
 
 h1 {
