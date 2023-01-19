@@ -68,8 +68,8 @@ button:active {
   text-align: end;
   font-size: 12px;
   font-weight: 400;
+  margin-block: 8px;
 }
-
 .description {
   text-overflow: ellipsis;
   overflow: hidden;

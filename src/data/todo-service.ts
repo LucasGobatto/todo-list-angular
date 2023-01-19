@@ -15,7 +15,7 @@ export class TodoService {
 
   addTodo(todoItem: Omit<TodoItemModel, 'id' | 'createdAt' | 'updatedAt'>) {
     const [, id] = Math.random().toString().split('.');
-    const now = this.formatDate(new Date());
+    const now = new Date();
     this.items.push({ ...todoItem, id, createdAt: now });
     this.updateLocalStorage();
   }
@@ -25,7 +25,7 @@ export class TodoService {
       if (item.id === id) {
         return Object.assign(item, {
           ...data,
-          updatedAt: this.formatDate(new Date()),
+          updatedAt: new Date(),
         });
       }
 
@@ -38,15 +38,6 @@ export class TodoService {
   deleteTodo(id: string) {
     this.items = this.items.filter((item) => item.id !== id);
     this.updateLocalStorage();
-  }
-
-  private formatDate(date: Date) {
-    const month = date.getMonth() + 1;
-    const fixedMonth = month > 9 ? month : `0${month}`;
-    const day = date.getDate();
-    const fixedDay = day > 9 ? day : `0${day}`;
-
-    return `${fixedDay}/${fixedMonth}/${date.getFullYear()}`;
   }
 
   private updateLocalStorage() {

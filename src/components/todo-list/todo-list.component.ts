@@ -1,4 +1,4 @@
-import { Component, SimpleChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../../data/todo-service';
 import { TodoItemModel, TodoStatus } from '../../domain/todo.model';
 
@@ -11,7 +11,7 @@ export class TodoListComponent implements OnInit {
   readonly title = 'To do List';
   readonly status: TodoStatus[] = ['Todo', 'In progress', 'Done'];
   private allItems: TodoItemModel[] = [];
-  items: Record<TodoStatus, TodoItemModel[]> = {
+  readonly items: Record<TodoStatus, TodoItemModel[]> = {
     Todo: [],
     'In progress': [],
     Done: [],
