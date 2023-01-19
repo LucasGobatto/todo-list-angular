@@ -1,4 +1,4 @@
-import { TodoItemModel } from '../domain/todo.model';
+import { TodoItemModel } from '@domain/todo.model';
 import { LocalStorageService } from './local-storage.service';
 
 export class TodoService {

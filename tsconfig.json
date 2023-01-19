@@ -1,8 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist ",
+    "baseUrl": "./src",
+    "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -12,14 +12,27 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+    "removeComments": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"]
+    "lib": ["ES2022", "dom"],
+    "paths": {
+      "@components": ["./components"],
+      "@components/*": ["./components/*"],
+      "@assets": ["./assets"],
+      "@assets/*": ["./assets/*"],
+      "@data": ["./data"],
+      "@data/*": ["./data/*"],
+      "@domain": ["./domain"],
+      "@domain/*": ["./domain/*"]
+    }
   },
+  "exclude": ["node_modules", "dist"],
+  "include": ["./src/**/*.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
